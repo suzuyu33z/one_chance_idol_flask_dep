@@ -1,0 +1,31 @@
+name: Deploy Python app to Azure Web App
+
+on:
+  push:
+    branches:
+      - main  # "main"ブランチにプッシュされた時にデプロイをトリガー
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'  # Pythonのバージョンを指定（適宜変更）
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Azure Web App Deploy
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'one_chance_idol_flask'  # Azure Web Appの名前
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # GitHub Secretsに登録したPublish Profile
+        package: '.'
