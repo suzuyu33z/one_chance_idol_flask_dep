@@ -26,6 +26,6 @@ jobs:
     - name: Azure Web App Deploy
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'one_chance_idol_flask'  # Azure Web Appの名前
+        app-name: 'tech0-gen-7-step4-prelesson-3'  # Azure Web Appの名前
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # GitHub Secretsに登録したPublish Profile
         package: '.'
